@@ -12,9 +12,10 @@ namespace twozerofoureight
 {
     public partial class TwoZeroFourEightView : Form, View
     {
+        int check = 0;
         Model model;
         Controller controller;
-       
+
         public TwoZeroFourEightView()
         {
             InitializeComponent();
@@ -59,6 +60,8 @@ namespace twozerofoureight
         }
         private void UpdateBoard(int[,] board)
         {
+            int sum = 0;
+
             UpdateTile(lbl00,board[0, 0]);
             UpdateTile(lbl01,board[0, 1]);
             UpdateTile(lbl02,board[0, 2]);
@@ -75,26 +78,42 @@ namespace twozerofoureight
             UpdateTile(lbl31,board[3, 1]);
             UpdateTile(lbl32,board[3, 2]);
             UpdateTile(lbl33,board[3, 3]);
+            for (int i = 0; i < 4; i++)
+            {
+                for(int j = 0; j < 4; j++)
+                {
+                    sum += board[i, j];
+                }
+            }
+            if (check == 0)
+            {
+                label1.Text = "0";
+                check++;
+            }
+            else label1.Text = sum.ToString();
+
+
         }
 
-        private void btnLeft_Click(object sender, EventArgs e)
+        private void Keyboard(object sender, KeyEventArgs e)
         {
-            controller.ActionPerformed(TwoZeroFourEightController.LEFT);
-        }
+            switch (e.KeyCode)
+            {
+                case Keys.W:
+                    controller.ActionPerformed(TwoZeroFourEightController.UP);
+                    break;
+                case Keys.S:
+                    controller.ActionPerformed(TwoZeroFourEightController.DOWN);
+                    break;
+                case Keys.D:
+                    controller.ActionPerformed(TwoZeroFourEightController.RIGHT);
+                    break;
+                case Keys.A:
+                    controller.ActionPerformed(TwoZeroFourEightController.LEFT);
+                    break;
 
-        private void btnRight_Click(object sender, EventArgs e)
-        {
-            controller.ActionPerformed(TwoZeroFourEightController.RIGHT);
-        }
+            }            
 
-        private void btnUp_Click(object sender, EventArgs e)
-        {
-            controller.ActionPerformed(TwoZeroFourEightController.UP);
-        }
-
-        private void btnDown_Click(object sender, EventArgs e)
-        {
-            controller.ActionPerformed(TwoZeroFourEightController.DOWN);
         }
 
     }

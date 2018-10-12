@@ -35,7 +35,7 @@ namespace twozerofoureight
                         break;
                     case DOWN:
                         m.PerformDown();
-                        break;
+                        break;                     
                 }
 
             }

@@ -35,11 +35,19 @@ namespace twozerofoureight
         public int[,] GetBoard()
         {
             return board;
-        }
-
+        }      
         private int[,] Random(int[,] input)
         {
-            while (true)
+            Boolean A = true;
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (board[i, j] == 0) A = true;
+                    else A = false; 
+                }
+            }
+                while (A)
             {
                 int x = rand.Next(boardSize);
                 int y = rand.Next(boardSize);
@@ -49,6 +57,7 @@ namespace twozerofoureight
                     break;
                 }
             }
+                
             return input;
         }
 
