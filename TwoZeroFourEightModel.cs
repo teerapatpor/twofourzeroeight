@@ -37,17 +37,8 @@ namespace twozerofoureight
             return board;
         }      
         private int[,] Random(int[,] input)
-        {
-            Boolean A = true;
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    if (board[i, j] == 0) A = true;
-                    else A = false; 
-                }
-            }
-                while (A)
+        {                    
+            while (game())
             {
                 int x = rand.Next(boardSize);
                 int y = rand.Next(boardSize);
@@ -60,6 +51,79 @@ namespace twozerofoureight
                 
             return input;
         }
+        public bool game()
+        {
+            bool check = false ;
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (board[i, j] == 0) check = true;
+                }
+            }
+            if (check == false) gameover();
+            return check;
+        }
+        public void gameover()
+        {
+            
+                if (endcheck() == 0)
+                {
+                    System.Windows.Forms.MessageBox.Show("Game Over");
+                    
+                }
+            
+        }
+        public int endcheck()
+        {
+            int tcheck = 0;
+            for (int x = 0; x < 4; x++)
+            {
+                for(int y = 0; y < 4; y++)
+                {
+                    if (x == 0 && y == 0)
+                    {
+                        if (board[x, y] == board[x, y + 1] || board[x, y] == board[x + 1, y]) tcheck = 1;
+                    }
+                    else if (x == 3 && y == 0)
+                    {
+                        if (board[x, y] == board[x, y + 1] || board[x, y] == board[x - 1, y]) tcheck = 1;
+                    }
+                    else if (x == 0 && y == 3)
+                    {
+                        if (board[x, y] == board[x, y - 1] || board[x, y] == board[x + 1, y]) tcheck = 1;
+                    }
+                    else if (x == 3 && y == 3)
+                    {
+                        if (board[x, y] == board[x, y - 1] || board[x, y] == board[x - 1, y]) tcheck = 1;
+                    }
+                    else if (x == 0 && (y != 0 && y != 3))
+                    {
+                        if (board[x, y] == board[x, y - 1] || board[x, y] == board[x, y + 1] || board[x, y] == board[x + 1, y]) tcheck = 1;
+                    }
+                    else if(x==3 && (y != 0 && y != 3))
+                    {
+                        if (board[x, y] == board[x, y - 1] || board[x, y] == board[x, y + 1] || board[x, y] == board[x - 1, y]) tcheck = 1;
+                    }
+                    else if(y==0 && (x != 0 && x != 3))
+                    {
+                        if (board[x, y] == board[x-1, y] || board[x, y] == board[x+1, y] || board[x, y] == board[x, y+1]) tcheck = 1;
+                    }
+                    else if(y==3 && (x != 0 && x != 3))
+                    {
+                        if (board[x, y] == board[x - 1, y] || board[x, y] == board[x + 1, y] || board[x, y] == board[x, y - 1]) tcheck = 1;
+                    }
+                    else
+                    {
+                        if (board[x, y] == board[x - 1, y] || board[x, y] == board[x + 1, y] || board[x, y] == board[x, y - 1]|| board[x, y] == board[x, y + 1]) tcheck = 1;
+                    }
+                    
+                }
+            }
+            return tcheck;
+        }
+
+    
 
         public void PerformDown()
         {
@@ -112,6 +176,7 @@ namespace twozerofoureight
             }
             board = Random(board);
             NotifyAll();
+         
         }
 
         public void PerformUp()
@@ -164,6 +229,7 @@ namespace twozerofoureight
             }
             board = Random(board);
             NotifyAll();
+           
         }
 
         public void PerformRight()
@@ -218,6 +284,7 @@ namespace twozerofoureight
             }
             board = Random(board);
             NotifyAll();
+           
         }
 
         public void PerformLeft()
@@ -268,6 +335,7 @@ namespace twozerofoureight
             }
             board = Random(board);
             NotifyAll();
+            
         }
     }
 }

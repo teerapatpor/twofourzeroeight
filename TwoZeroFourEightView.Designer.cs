@@ -356,7 +356,9 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TwoZeroFourEightView";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load1);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Keyboard);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.control_PreviewKeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -28,7 +28,7 @@ namespace twozerofoureight
 
         public void Notify(Model m)
         {
-            UpdateBoard(((TwoZeroFourEightModel) m).GetBoard());
+            UpdateBoard(((TwoZeroFourEightModel)m).GetBoard());
         }
 
         private void UpdateTile(Label l, int i)
@@ -62,25 +62,25 @@ namespace twozerofoureight
         {
             int sum = 0;
 
-            UpdateTile(lbl00,board[0, 0]);
-            UpdateTile(lbl01,board[0, 1]);
-            UpdateTile(lbl02,board[0, 2]);
-            UpdateTile(lbl03,board[0, 3]);
-            UpdateTile(lbl10,board[1, 0]);
-            UpdateTile(lbl11,board[1, 1]);
-            UpdateTile(lbl12,board[1, 2]);
-            UpdateTile(lbl13,board[1, 3]);
-            UpdateTile(lbl20,board[2, 0]);
-            UpdateTile(lbl21,board[2, 1]);
-            UpdateTile(lbl22,board[2, 2]);
-            UpdateTile(lbl23,board[2, 3]);
-            UpdateTile(lbl30,board[3, 0]);
-            UpdateTile(lbl31,board[3, 1]);
-            UpdateTile(lbl32,board[3, 2]);
-            UpdateTile(lbl33,board[3, 3]);
+            UpdateTile(lbl00, board[0, 0]);
+            UpdateTile(lbl01, board[0, 1]);
+            UpdateTile(lbl02, board[0, 2]);
+            UpdateTile(lbl03, board[0, 3]);
+            UpdateTile(lbl10, board[1, 0]);
+            UpdateTile(lbl11, board[1, 1]);
+            UpdateTile(lbl12, board[1, 2]);
+            UpdateTile(lbl13, board[1, 3]);
+            UpdateTile(lbl20, board[2, 0]);
+            UpdateTile(lbl21, board[2, 1]);
+            UpdateTile(lbl22, board[2, 2]);
+            UpdateTile(lbl23, board[2, 3]);
+            UpdateTile(lbl30, board[3, 0]);
+            UpdateTile(lbl31, board[3, 1]);
+            UpdateTile(lbl32, board[3, 2]);
+            UpdateTile(lbl33, board[3, 3]);
             for (int i = 0; i < 4; i++)
             {
-                for(int j = 0; j < 4; j++)
+                for (int j = 0; j < 4; j++)
                 {
                     sum += board[i, j];
                 }
@@ -94,21 +94,35 @@ namespace twozerofoureight
 
 
         }
+        private void Form1_Load1(object sender, EventArgs e)
+        {
+            foreach (Control control in this.Controls)
+            {
+                control.PreviewKeyDown += new PreviewKeyDownEventHandler(control_PreviewKeyDown);
+            }
+        }
+        void control_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down|| e.KeyCode == Keys.Right|| e.KeyCode == Keys.Left)
+            {
+                e.IsInputKey = true;
+            }
+        }
 
         private void Keyboard(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
-                case Keys.W:
+                case Keys.Up:
                     controller.ActionPerformed(TwoZeroFourEightController.UP);
                     break;
-                case Keys.S:
+                case Keys.Down:
                     controller.ActionPerformed(TwoZeroFourEightController.DOWN);
                     break;
-                case Keys.D:
+                case Keys.Right:
                     controller.ActionPerformed(TwoZeroFourEightController.RIGHT);
                     break;
-                case Keys.A:
+                case Keys.Left:
                     controller.ActionPerformed(TwoZeroFourEightController.LEFT);
                     break;
 
